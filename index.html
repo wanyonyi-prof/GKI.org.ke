@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Kenya Initiative (GKI)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2e7d32;
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .flashcard {
+      width: 100%;
+      max-width: 600px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .flashcard:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    #question {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+
+    #answer {
+      margin-top: 15px;
+      display: none;
+      text-align: left;
+      line-height: 1.6;
+      animation: fadeIn 0.6s ease;
+    }
+
+    #answer p, #answer ul {
+      margin: 0 0 10px 0;
+    }
+
+    #answer ul {
+      margin-left: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    button {
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2e7d32;
+      transform: scale(1.05);
+    }
+
+    #progress {
+      font-weight: bold;
+      color: #1b5e20;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #444;
+      background: #f1f8e9;
+      padding: 10px;
+      border-top: 2px solid #c8e6c9;
+    }
+
+    a.join-link {
+      color: #2e7d32;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a.join-link:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .flashcard {
+        padding: 18px;
+      }
+
+      #question {
+        font-size: 1.1em;
+      }
+
+      button {
+        padding: 8px 14px;
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🌿 Green Kenya Initiative (GKI)</h1>
+  <p>Welcome to our interactive guide — learn who we are and how you can join us.</p>
+
+  <div class="container">
+    <div class="flashcard">
+      <h2 id="question">Question will appear here</h2>
+      <button onclick="showAnswer()">See Answer</button>
+      <div id="answer"></div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="prevCard()">⬅️ Previous</button>
+      <button onclick="nextCard()">Next ➡️</button>
+    </div>
+
+    <p id="progress"></p>
+  </div>
+
+  <footer>
+    © 2025 Green Kenya Initiative | Bungoma County, Kenya <br>
+    Contact: <a href="mailto:hanningtonwanyonyi00@gmail.com">hanningtonwanyonyi00@gmail.com</a>
+  </footer>
+
+  <script>
+    const cards = [
+      {
+        question: "🌍 What is GKI?",
+        answer: `
+        <p><strong>Green Kenya Initiative (GKI)</strong> is a dynamic youth-led organization committed to building a greener, more innovative, and self-reliant Kenya. We go beyond tree planting and waste management — we focus on transforming ideas into practical solutions that bring real impact to society.</p>
+
+        <p>We nurture <strong>youth innovations</strong> across agriculture, technology, and value addition — supporting young people with ideas that can grow into impactful projects and sustainable enterprises.</p>
+
+        <p>Our goal is to create initiatives that not only improve communities but also <strong>generate employment</strong>, enhance <strong>agricultural, cultural, socio-economic, and environmental sustainability</strong>, and build resilience in the face of modern challenges.</p>
+
+        <p>Through <strong>entrepreneurship development</strong>, we equip youth with practical knowledge to explore chain production, develop marketable products, and create business opportunities that uplift livelihoods.</p>
+
+        <p>We also tackle <strong>environmental problems</strong> by finding innovative ways to convert waste into useful products — promoting a circular economy that values both people and planet.</p>
+
+        <p>Above all, GKI is a movement of <strong>mentorship and empowerment</strong>. We guide youths and teenagers to grow responsibly, embrace creativity, and build healthy, purpose-driven lives that benefit their communities and future generations.</p>
+        `
+      },
+      {
+        question: "🌍 Who can join GKI?",
+        answer: `
+        <p>Membership in the <strong>Green Kenya Initiative (GKI)</strong> is open to individuals who are passionate about what we stand for — people committed to safeguarding the environment, supporting Kenyan communities, and empowering youth to drive positive change.</p>
+
+        <p>We welcome those who are willing to volunteer their time, energy, and ideas in contributing to a greener, more sustainable future for Kenya — one that promotes better livelihoods and resilience across all communities.</p>
+
+        <p><strong>Membership Categories:</strong></p>
+        <ul>
+          <li><strong>Ordinary Members</strong> – Active participants mainly based in <strong>Bungoma County</strong> and nearby towns, directly accessible to the headquarters. They take part in local projects, meetings, and daily operations.</li>
+          <li><strong>Green Ambassadors</strong> – Members based outside Bungoma who represent GKI in their regions, mobilizing youth and promoting awareness nationwide.</li>
+          <li><strong>Associate Members</strong> – Partners and supporters who provide <strong>financial, material, or technical support</strong>, contributing to trainings, workshops, and organizational growth.</li>
+          <li><strong>Honorary Members</strong> – Advisors, patrons, and experts who mentor the organization and may also assist in <strong>grant sourcing, partnerships, and fellowships</strong> for GKI members.</li>
+        </ul>
+        <p>Every member plays a vital role in shaping a greener, stronger, and more united Kenya.</p>
+        `
+      },
+      {
+        question: "🌍 Why should I join?",
+        answer: `
+        <p>Joining the <strong>Green Kenya Initiative (GKI)</strong> means becoming part of a vibrant movement of young innovators and changemakers committed to building a sustainable and resilient Kenya.</p>
+
+        <p>As a member, you’ll gain practical skills in <strong>agriculture, technology, entrepreneurship, and environmental management</strong> — equipping you to transform ideas into impactful projects and ventures.</p>
+
+        <p>GKI provides a platform for you to <strong>collaborate, learn, and grow</strong> with like-minded youths passionate about protecting the environment and improving livelihoods.</p>
+
+        <p>You’ll benefit from <strong>mentorship, trainings, workshops, and innovation challenges</strong> that build leadership and professional experience.</p>
+
+        <p>By joining GKI, you become a <strong>catalyst for change</strong> — helping to promote sustainability, create employment, and inspire the next generation of responsible and empowered youth.</p>
+        `
+      },
+      {
+        question: "🌍 What are GKI’s goals?",
+        answer: `
+        <p><strong>GKI’s core goals</strong> are built around empowering youth, driving innovation, and promoting sustainability across Kenya:</p>
+        <ul>
+          <li><strong>1. Empower Youth & Communities:</strong> Equip young people with resources, training, and mentorship to lead impactful projects that improve livelihoods and promote self-employment.</li>
+          <li><strong>2. Promote Sustainable Agriculture:</strong> Advance climate-smart farming, value addition, and agri-tech to enhance food security and protect the environment.</li>
+          <li><strong>3. Foster Innovation & Entrepreneurship:</strong> Support youth-led ideas that tackle community challenges and create jobs.</li>
+          <li><strong>4. Advance Environmental Conservation:</strong> Restore ecosystems, encourage waste conversion, and promote renewable energy adoption.</li>
+          <li><strong>5. Strengthen Socio-economic Resilience:</strong> Promote inclusive growth, reduce poverty, and enhance rural economies through sustainability.</li>
+          <li><strong>6. Build Partnerships:</strong> Collaborate with government, NGOs, and global partners for grants, mentorship, and growth.</li>
+          <li><strong>7. Inspire Leadership:</strong> Develop responsible and ethical youth leaders who serve with integrity and innovation.</li>
+        </ul>
+        <p>Together, these goals drive GKI’s vision for a greener, self-reliant, and prosperous Kenya.</p>
+        `
+      },
+      {
+        question: "🌱 What projects does GKI do?",
+        answer: `
+        <p>GKI runs diverse, youth-driven projects that integrate <strong>innovation, agriculture, entrepreneurship, and environmental conservation</strong> for sustainable change:</p>
+        <ul>
+          <li><strong>1. Agricultural & Value Addition Projects:</strong> Promoting crop and animal production, agribusiness, and agro-processing initiatives.</li>
+          <li><strong>2. Innovation & Technology:</strong> Supporting youth innovators with impactful ideas in farming, recycling, and renewable energy.</li>
+          <li><strong>3. Waste Conversion & Recycling:</strong> Turning waste into valuable products that support green jobs and a cleaner planet.</li>
+          <li><strong>4. Environmental Restoration:</strong> Tree planting, clean-ups, and awareness campaigns that restore Kenya’s natural balance.</li>
+          <li><strong>5. Youth Mentorship & Leadership:</strong> Guiding young people through skill-building and moral development for responsible leadership.</li>
+          <li><strong>6. Entrepreneurship & Livelihood Programs:</strong> Enabling youth to start eco-friendly businesses and create community impact.</li>
+        </ul>
+        <p>Through these projects, GKI bridges innovation with community empowerment — creating lasting impact nationwide.</p>
+        `
+      },
+      {
+        question: "🌱 How does GKI help the community?",
+        answer: `
+        <p>GKI empowers communities through education, opportunity, and environmental restoration. We:</p>
+        <ul>
+          <li><strong>1. Create Youth Employment:</strong> Train and support youths to start income-generating agribusiness and innovation ventures.</li>
+          <li><strong>2. Promote Environmental Restoration:</strong> Lead campaigns on tree planting, recycling, and ecosystem restoration.</li>
+          <li><strong>3. Empower Farmers & Innovators:</strong> Offer mentorship, training, and resources for sustainable farming and innovation.</li>
+          <li><strong>4. Support Sustainable Livelihoods:</strong> Improve food security, income levels, and resilience through community-driven projects.</li>
+          <li><strong>5. Offer Mentorship Programs:</strong> Guide youths and teenagers toward responsible citizenship and leadership.</li>
+        </ul>
+        <p>Every GKI initiative aims to build a stronger, greener, and more resilient community for all.</p>
+        `
+      },
+      {
+        question: "🌱 What events can I participate in?",
+        answer: `
+        <p>Members can participate in dynamic events such as:</p>
+        <ul>
+          <li><strong>1. Environmental Days:</strong> World Environment Day, Climate Action Week, and local clean-up drives.</li>
+          <li><strong>2. Training Workshops:</strong> Hands-on learning in farming, innovation, and leadership.</li>
+          <li><strong>3. Innovation Challenges:</strong> Competitions for youth-led green solutions and startup ideas.</li>
+          <li><strong>4. Mentorship Forums:</strong> Connect with professionals and role models for guidance and inspiration.</li>
+          <li><strong>5. Community Outreach:</strong> Engage schools, farmers, and residents in sustainability projects.</li>
+        </ul>
+        <p>Each event builds your skills, network, and impact as a GKI member.</p>
+        `
+      },
+      {
+        question: "👥 How do I register?",
+        answer: `
+        <p>Registration is simple. You’ll fill out our official membership form with your details, interests, and preferred category of membership.</p>
+        <p>Our team will review your submission and connect you with ongoing projects and communication channels.</p>
+        <p><strong>Note:</strong> The registration link is shared in the last card of this flashcard series.</p>
+        `
+      },
+      {
+        question: "👥 Do I pay to join?",
+        answer: `
+        <p>Yes. Membership requires a small fee based on your category — <strong>Ordinary Member</strong>, <strong>Green Ambassador</strong>, <strong>Associate Member</strong>, or <strong>Honorary Member</strong>.</p>
+        <p>The specific fees are clearly listed in the membership form (link at the end).</p>
+        <p>These contributions sustain our operations, projects, and youth empowerment programs, all handled transparently.</p>
+        <p>Choose your category based on your interest, insight, and commitment to GKI’s mission of building a greener and stronger Kenya.</p>
+        `
+      },
+      {
+        question: "👥 What benefits do members get?",
+        answer: `
+        <p>Members enjoy numerous benefits including:</p>
+        <ul>
+          <li><strong>1. Trainings & Workshops:</strong> Build skills in innovation, agribusiness, and sustainability.</li>
+          <li><strong>2. Networking:</strong> Connect with youth leaders, partners, and mentors across Kenya.</li>
+          <li><strong>3. Leadership Opportunities:</strong> Take active roles in projects and committees.</li>
+          <li><strong>4. Recognition:</strong> Earn certificates, recommendation letters, and event representation.</li>
+          <li><strong>5. Funding Access:</strong> Opportunities for grants, fellowships, and innovation support.</li>
+          <li><strong>6. Mentorship:</strong> Continuous guidance to shape personal and professional growth.</li>
+        </ul>
+        <p>Being a GKI member means joining a movement that educates, empowers, and transforms lives.</p>
+        `
+      },
+      {
+        question: "👥 Ready to Join GKI?",
+        answer: `
+        <p>Now that you’ve learned who we are and what we stand for, it’s your time to be part of a growing movement of young innovators, environmental champions, and community transformers.</p>
+
+        <p>By joining the <strong>Green Kenya Initiative (GKI)</strong>, you become part of a purpose-driven network working to build a greener, more sustainable, and self-reliant Kenya — one project, one idea, and one youth at a time.</p>
+
+        <p>Whether your passion is in agriculture, innovation, entrepreneurship, mentorship, or environmental conservation, there’s a place for you in GKI to grow, learn, and make a difference.</p>
+
+        <p>Take the next step today — your commitment, however small, contributes to a stronger and more resilient nation for all.</p>
+
+        <p><a href="https://forms.gle/KUi1GRETevfm146C9" target="_blank" class="join-link">👉 Click Here to Register Now</a></p>
+
+        <p><em>Together, we grow greener, stronger, and better.</em></p>
+        `
+      }
+    ];
+
+    let currentCard = 0;
+
+    function showCard() {
+      const q = document.getElementById("question");
+      const a = document.getElementById("answer");
+      q.innerHTML = cards[currentCard].question;
+      a.innerHTML = cards[currentCard].answer;
+      a.style.display = "none";
+      document.getElementById("progress").innerText = `Card ${currentCard + 1} of ${cards.length}`;
+    }
+
+    function showAnswer() {
+      document.getElementById("answer").style.display = "block";
+    }
+
+    function nextCard() {
+      if (currentCard < cards.length - 1) {
+        currentCard++;
+        showCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentCard > 0) {
+        currentCard--;
+        showCard();
+      }
+    }
+
+    // Initialize first card
+    showCard();
+  </script>
+</body>
+</html>
